@@ -10,6 +10,8 @@ This is a project-based learning experience. My main goals for the project:
 
 - Create a GUI 
 
+- Make program self-excecutable (Frozen python binaries)
+
 ## Usage Information
 
 How to install & run:
