@@ -1,8 +1,7 @@
 # Roadmap
 ## Ver 1 - Test & Run
-- Test-Driven-Development; tests are written first.
-- Runs Conway's Game Of Life. No frills.
-- Continuous Integration of tests. Merge only succeeds after tests are passed.
+- Setup continuous integration +  tests are written first.
+- Runs Conway's Game Of Life in terminal. No frills.
 
 ## Ver 2 - GUI
 - The user can define a board state & select fields using an interactive GUI.
@@ -11,4 +10,6 @@
 
 ## Ver 3 - Freeze
 - The program becomes self-excecutable (Frozen Python Binaries)
+- Auto release on Github when new version tag
+https://github.com/marketplace/actions/automatic-releases 
 
