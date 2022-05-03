@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "game-of-life"
+name = "gameOfLife"
 version = "0.1.0"
 description = ""
 authors = ["Kevin Focke <19843342+KevinFocke@users.noreply.github.com>"]
