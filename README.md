@@ -6,7 +6,9 @@ Simulates Conway's Game Of Life. Interact using a GUI.
 
 This is a project-based learning experience. My main goals for the project:
 
-- Practice test-driven-development
+- Setup Continuous Integration environment
+
+- Practice Test-Driven-Development
 
 - Create a GUI 
 
