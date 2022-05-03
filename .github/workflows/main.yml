@@ -35,6 +35,16 @@ jobs:
       # You can test your matrix by printing the current Python version
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
+      # setup Poetry
+      - name: Download Poetry
+        run: curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+
+      - name: Install project dependencies
+        run: poetry install
+
+      - name: Pytest within Poetry environment
+        run: poetry run pytest
+
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
