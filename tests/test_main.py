@@ -1,7 +1,9 @@
+import gameoflife.main  # explicitly maintain namespace information for debug
 from gameoflife import __version__
-import gameoflife.main  # explicitly maintain namespace information for debugging
 
 # Sanity checks
+
+
 def test_main_module_found():
     assert gameoflife.main.module_sanity_check() == 1
 

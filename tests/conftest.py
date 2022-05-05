@@ -1,6 +1,6 @@
 import pytest
 
-""" 
+"""
 Single source of truth for fixtures across tests
 """
 
