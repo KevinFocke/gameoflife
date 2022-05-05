@@ -8,7 +8,9 @@ This is a project-based learning experience. My main goals for the project:
 
 - Setup Continuous Integration environment
 
-- Practice Test-Driven-Development
+- Practice Test-Driven-Development (Red, Green, Refactor methodology)
+
+- Object-Oriented Programming paradigm.
 
 - Create a GUI 
 
