@@ -1,2 +1,7 @@
-def hello_test_integration():
-    return ("hello test world")
+
+
+def module_sanity_check():
+    """
+    Can the module be found during testing?
+    """
+    return 1
