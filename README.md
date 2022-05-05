@@ -29,3 +29,10 @@ How to install & run:
 - Project idea from https://robertheaton.com/2018/07/20/project-2-game-of-life/ 
 
 ## Dependencies
+
+## Other
+
+- Code formatting by Black:
+https://black.readthedocs.io/en/stable/
+- Linting using Flake8
+- Imports sorted using isort
