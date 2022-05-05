@@ -1,13 +1,14 @@
 from gameoflife import __version__
-import pytest
-import gameoflife.main  #explicitly maintain namespace information for debugging
+import gameoflife.main  # explicitly maintain namespace information for debugging
 
-#Sanity checks
-def test_main_module_find():
+# Sanity checks
+def test_main_module_found():
     assert gameoflife.main.module_sanity_check() == 1
 
+
 def test_version():
-    assert __version__ == '0.1.0'
+    assert __version__ == "0.1.0"
+
 
 def test_fixture_input_via_conftest(sanity_check_fixture):
     """
@@ -15,10 +16,10 @@ def test_fixture_input_via_conftest(sanity_check_fixture):
     """
     assert sanity_check_fixture == "testinput"
 
+
 # Test board states
 
 # Board initialized with random values?
-
 
 
 # count live neighbors
