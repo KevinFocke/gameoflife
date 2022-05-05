@@ -9,19 +9,13 @@ def test_main_module_find():
 def test_version():
     assert __version__ == '0.1.0'
 
-@pytest.fixture #fixture supplies test input data
-def test_fixture_input():
+def test_fixture_input_via_conftest(sanity_check_fixture):
     """
-    Does the pytest fixture work?
+    conftest.py is used to supply fixtures accross test files
     """
-    return "hello"
-
-def test_fixture_input_working(test_fixture_input):
-    assert test_fixture_input == "hello"
+    assert sanity_check_fixture == "testinput"
 
 # Test board states
-
-
 
 # Board initialized with random values?
 
