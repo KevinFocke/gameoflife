@@ -10,7 +10,7 @@ This is a project-based learning experience. My main goals for the project:
 
 - Practice Test-Driven-Development (Red, Green, Refactor methodology)
 
-- Object-Oriented Programming paradigm.
+- Practice Object-Oriented programming.
 
 - Create a GUI & automate GUI testing
 https://wiki.python.org/moin/PyQt/GUI_Testing
@@ -27,6 +27,7 @@ How to install & run:
 ## Credits
 
 - Project idea from https://robertheaton.com/2018/07/20/project-2-game-of-life/ 
+- Object structure inspired by https://robertheaton.com/2019/11/30/pfab2-how-to-structure-your-programs/ 
 
 ## Dependencies
 

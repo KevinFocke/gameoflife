@@ -4,7 +4,7 @@
 - Runs Conway's Game Of Life in terminal. No frills.
 
 ## Ver 2 - GUI
-- The user can define a board state & select fields using an interactive GUI.
+- The user can edit fields using an interactive GUI.
 - Pause & Play the board
 - Save the board
 
