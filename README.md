@@ -17,7 +17,7 @@ https://wiki.python.org/moin/PyQt/GUI_Testing
 https://github.com/pytest-dev/pytest-qt/#pytest-qt
 https://martinfowler.com/eaaDev/uiArchs.html
  
- - Moddeling diagrams
+ - Modelling diagrams
 
 - Make program self-excecutable (Frozen python binaries)
 
