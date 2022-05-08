@@ -48,10 +48,10 @@ jobs:
         run: poetry install --no-interaction --no-root
       - name: Install library
         run: poetry install --no-interaction
-      - name: Activate virtual environment
-        run: |
-          source $VENV
-          pytest --version
+      #- name: Activate virtual environment
+      #  run: |
+      #    source $VENV
+      #    pytest --version
       - name: Pytest within Poetry environment
         run: poetry run pytest -v --durations=0 --durations-min=1
       
