@@ -33,7 +33,7 @@ jobs:
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
-      - name: Check poetry version
+      - name: Check Poetry version
         run: poetry --version
       - name: Load cached venv
         id: cached-pip-wheels
@@ -45,8 +45,8 @@ jobs:
         run: poetry install --no-interaction --no-root
       - name: Install library
         run: poetry install --no-interaction
-      - name: Activate virtual environment
-        run: poetry shell
+      #- name: Activate virtual environment
+      #  run: source $VENV
       - name: Pytest within Poetry environment
         run: poetry run pytest -v --durations=0 --durations-min=1
       
