@@ -19,7 +19,8 @@ class Board:
         randomize_seed=random.randint(0, 1000000),
         size=[5, 5],
     ):
-        # size 2-dimensional? TODO: check if el is not int
+        # size 2-dimensional?
+        self.init_args = locals()  # store called arguments for debugging
         if self.check_size(*size) == 1:
             sys.exit("error in size argument")
         x, y = size
@@ -35,7 +36,7 @@ class Board:
             return 1
 
 
-# a = Board()
+a = Board()
 # print(a.state)
 
 # print("testprint")
