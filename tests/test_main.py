@@ -8,11 +8,6 @@ def test_main_module_found():
     assert gameoflife.main.module_sanity_check() == 1
 
 
-def test_version():
-    """tests poetry version"""
-    assert __version__ == "0.1.0"
-
-
 def test_fixture_input_via_conftest(sanity_check_fixture):
     """
     conftest.py is used to supply fixtures accross test files
