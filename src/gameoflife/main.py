@@ -23,6 +23,7 @@ class Board:
         if self.check_size(*size) == 1:
             sys.exit("error in size argument")
         x, y = size
+        self.randomize_seed = randomize_seed
         random.seed(randomize_seed)  # allow optionally setting seed
         self.state = [[0 for col in range(y)] for row in range(x)]
         if randomize == 1:
