@@ -13,11 +13,17 @@ def module_sanity_check():
 
 
 class Board:
-    def __init__(self, randomize=0, randomize_seed=20, size=[5, 5]):
+    def __init__(
+        self,
+        randomize=0,
+        randomize_seed=random.randint(0, 1000000),
+        size=[5, 5],
+    ):
         # size 2-dimensional? TODO: check if el is not int
         if self.check_size(*size) == 1:
             sys.exit("error in size argument")
         x, y = size
+        random.seed(randomize_seed)  # allow optionally setting seed
         self.state = [[0 for col in range(y)] for row in range(x)]
         if randomize == 1:
             [[random.random(0, 1) for col in range(y)] for row in range(x)]
