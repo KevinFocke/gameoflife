@@ -17,7 +17,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up Python 3.x
         uses: actions/setup-python@v3
         with:
@@ -29,10 +29,12 @@ jobs:
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
       - name: Install Poetry
-        uses: snok/install-poetry@v1
+        uses: snok/install-poetry@v1.3.1
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
+      - name: Check poetry version
+        run: poetry --version
       - name: Load cached venv
         id: cached-pip-wheels
         uses: actions/cache@v2
@@ -43,9 +45,8 @@ jobs:
         run: poetry install --no-interaction --no-root
       - name: Install library
         run: poetry install --no-interaction
-      - run: |
-          echo $VENV
-          pytest --version
+      - name: Activate virtual environment
+      - run: poetry shell
       - name: Pytest within Poetry environment
         run: poetry run pytest -v --durations=0 --durations-min=1
       
