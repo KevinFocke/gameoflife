@@ -46,7 +46,7 @@ jobs:
       - name: Install library
         run: poetry install --no-interaction
       - name: Activate virtual environment
-      - run: poetry shell
+        run: poetry shell
       - name: Pytest within Poetry environment
         run: poetry run pytest -v --durations=0 --durations-min=1
       
