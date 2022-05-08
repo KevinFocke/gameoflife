@@ -53,5 +53,5 @@ jobs:
           source $VENV
           pytest --version
       - name: Pytest within Poetry environment
-        run: pytest -v --durations=0 --durations-min=1
+        run: poetry run pytest -v --durations=0 --durations-min=1
       
