@@ -1,8 +1,8 @@
 # Roadmap
 ## Ver 1 [ ] Continuous Integration
-[x] Setup continuous integration
+- [x] Setup continuous integration
 
-[ ] Auto release on Github
+- [ ] Auto release on Github
 
 [x] Setup initial tests
  
