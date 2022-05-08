@@ -6,7 +6,7 @@
 
 - [x] Setup initial tests
  
-- [ ] The program becomes self[ ]excecutable (Frozen Python Binaries)
+- [ ] The program becomes self-excecutable (Frozen Python Binaries)
 
 ## Ver 2 [ ] GUI & Game
 - [ ] The user can edit fields using an interactive GUI.
