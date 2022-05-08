@@ -19,23 +19,7 @@ jobs:
     runs-on: [ubuntu-latest]
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false
-    - name: Output Release URL File
-      run: echo "${{ steps.create_release.outputs.upload_url }}" > release_url.txt
-    - name: Save Release URL File for publish
-      uses: actions/upload-artifact@v1
-      with:
-        name: release_url
-        path: release_url.txt
+      - run: echo 'triggering worflow has failed'
 
   buildpackages:
     name: Build packages
@@ -47,14 +31,14 @@ jobs:
           - os: macos-latest
             TARGET: macos
             CMD_BUILD: >
-                pyinstaller -F -w -n src/gameoflife &&
+                pyinstaller -F -w src/gameoflife/main.py &&
                 cd dist/ &&
                 zip -r9 src/gameoflife gameoflife.app/
             OUT_FILE_NAME: src/gameoflife.zip
             ASSET_MIME: application/zip
           - os: windows-latest
             TARGET: windows
-            CMD_BUILD: pyinstaller -F -w -n src/gameoflife 
+            CMD_BUILD: pyinstaller -F -w src/gameoflife/main.py 
             OUT_FILE_NAME: src/gameoflife.exe
             ASSET_MIME: application/vnd.microsoft.portable-executable
     steps:
