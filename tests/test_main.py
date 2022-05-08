@@ -9,6 +9,7 @@ def test_main_module_found():
 
 
 def test_version():
+    """tests poetry version"""
     assert __version__ == "0.1.0"
 
 
