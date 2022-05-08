@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false # false means: if one job fails, continue the others
       matrix: 
-        os: [ "ubuntu-latest", "macos-latest", "windows-latest" ]
+        os: [ "ubuntu-20.04", "macos-11", "windows-2022" ]
     defaults:
       run:
         shell: bash # use bash for Windows compatability

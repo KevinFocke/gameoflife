@@ -9,14 +9,14 @@ on:
 
 jobs:
   on-success:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - run: echo 'The triggering workflow passed'
 
   createrelease:
     name: Create Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
       - run: echo 'triggering worflow has failed'
@@ -24,6 +24,6 @@ jobs:
   buildpackages:
     name: Build packages
     needs: createrelease
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - run: echo 'it will build packages here'

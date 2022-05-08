@@ -21,6 +21,7 @@ class Board:
     ):
         # size 2-dimensional?
         self.init_args = locals()  # store called arguments for debugging
+        print(self.init_args)
         if self.check_size(*size) == 1:
             sys.exit("error in size argument")
         x, y = size
