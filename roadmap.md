@@ -1,15 +1,22 @@
 # Roadmap
-## Ver 1 - Test & Run
-- Setup continuous integration +  tests are written first.
-- Runs Conway's Game Of Life in terminal. No frills.
+## Ver 1 - Continuous Integration
+x Setup continuous integration
 
-## Ver 2 - GUI
-- The user can edit fields using an interactive GUI.
-- Pause & Play the board
-- Save the board
+- Auto release on Github
 
-## Ver 3 - Freeze
+x Setup initial tests
+ 
 - The program becomes self-excecutable (Frozen Python Binaries)
-- Auto release on Github when new version tag
+
 https://github.com/marketplace/actions/automatic-releases 
 
+## Ver 2 - GUI & Game
+- The user can edit fields using an interactive GUI.
+
+- The user can automatically create test scenarios using the interactive GUI
+
+- Runs Conway's Game Of Life in terminal. No frills.
+
+- Pause & Play the board
+
+- Save the board
