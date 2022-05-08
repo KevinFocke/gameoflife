@@ -17,11 +17,16 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
-      - name: Set up python
-        id: setup-python
-        uses: actions/setup-python@v2
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v3
         with:
-          python-version: 3.9
+          # Semantic version range syntax or exact version of a Python version
+          python-version: '3.10'
+          # Optional - x64 or x86 architecture, defaults to x64
+          architecture: 'x64'
+      # You can test your matrix by printing the current Python version
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
       - name: Install Poetry
         uses: snok/install-poetry@v1
         with:
@@ -40,3 +45,6 @@ jobs:
       - run: |
           source $VENV
           pytest --version
+      - name: Pytest within Poetry environment
+        run: poetry run pytest -v --durations=0 --durations-min=1
+      
