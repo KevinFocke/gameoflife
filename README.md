@@ -29,7 +29,7 @@ How to install & run:
 
 - Project idea from https://robertheaton.com/2018/07/20/project-2-game-of-life/ 
 - Object structure inspired by https://robertheaton.com/2019/11/30/pfab2-how-to-structure-your-programs/ 
-- Multi-platform auto release tutorial by https://data-dive.com/multi-os-deployment-in-cloud-using-pyinstaller-and-github-actions
+- Multi-platform auto release tutorial by https://data-dive.com/multi-os-deployment-in-cloud-using-pyinstaller-and-github-actions (didn't work, but got me started on the right track)
 
 ## Dependencies
 
