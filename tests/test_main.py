@@ -1,5 +1,4 @@
 import gameoflife.main  # explicitly maintain namespace information for debug
-from gameoflife import __version__
 
 # Sanity checks
 
