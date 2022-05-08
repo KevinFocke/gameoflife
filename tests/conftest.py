@@ -31,9 +31,9 @@ def sanity_check_nested_array():
 
 @pytest.fixture
 def random_board_fixture():
-    return gameoflife.main.Board(randomize_seed=1)
+    return gameoflife.main.Board(randomize=1)
 
 
 @pytest.fixture
 def dead_board_fixture():
-    return gameoflife.main.Board()
+    return gameoflife.main.Board(randomize=0)

@@ -39,19 +39,16 @@ def test_init_board(dead_board_fixture):
     """
     Does the board get initialized?
     """
-    assert dead_board_fixture  # returns true if object exists
+    assert dead_board_fixture.state  # returns true if object exists
 
 
-def test_dead_board_next_state(dead_board_fixture):
-    """
-    Does the dead board stay dead?
-    Or have we created life out of nothing all of the sudden?
-    """
-    for cell in dead_board_fixture.next_state():
-        assert cell == 0
-
-
-# Board initialized with random values?
+# def test_dead_board_next_state(dead_board_fixture):
+#     """
+#     Does the dead board stay dead?
+#     Or have we created life out of nothing all of the sudden?
+#     """
+#     for cell in dead_board_fixture.next_state():
+#         assert cell == 0
 
 
 # count live neighbors
