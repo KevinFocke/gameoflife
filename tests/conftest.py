@@ -7,8 +7,9 @@ Single source of truth for fixtures across tests
 
 # Scopes of pytest fixtures decide how often they are run.
 # Syntax: @pytest.fixture(scope="function")
+# Unique polymorphism: You can call the class directly; it returns an object!
 # The default scope of a fixture is function; this means:
-# the fixture is setup & tore down after every function call.
+# The fixture is a wrapper; setup before, teardown after.
 # Other possible fixtures are: session, class, module
 # You can also make a fixture apply to every test with autouse
 # Syntax: @pytest.fixture(autouse=True)
