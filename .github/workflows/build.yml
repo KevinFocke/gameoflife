@@ -16,7 +16,7 @@ jobs:
 
   createrelease:
     name: Create Release
-    runs-on: [ubuntu-latest]
+    runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
       - run: echo 'triggering worflow has failed'
@@ -24,6 +24,6 @@ jobs:
   buildpackages:
     name: Build packages
     needs: createrelease
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - run: echo 'it will build packages here'
