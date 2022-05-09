@@ -43,3 +43,8 @@ def board_fixture_dead():
 @pytest.fixture
 def board_fixture_mismatch_state_size():
     return gameoflife.main.Board(state=[[0, 1, 0], [0, 1, 1, 1]], size=[5, 5])
+
+
+@pytest.fixture
+def board_fixture_state_4_by_4():
+    return gameoflife.main.Board(state=[[0, 1, 1, 1], [1, 1, 1, 0]])

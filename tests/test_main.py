@@ -96,6 +96,10 @@ def test_init_state_incorrect_values():
         gameoflife.main.Board(state=[[0, 1], [1, 2]])
 
 
+def test_init_state_set(board_fixture_state_4_by_4):
+    assert board_fixture_state_4_by_4.state == [[0, 1, 1, 1], [1, 1, 1, 0]]
+
+
 # TODO: add check that state contents is always 0 or 1
 
 

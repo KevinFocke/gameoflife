@@ -69,8 +69,9 @@ class Board:
             raise TypeError("expected list of lists format:" + expected_format)
         for dim in state:
             # check that each element is 0 or 1
-            if not all([el in accepted_values for el in dim]):
-                raise ValueError("Expected state values between 0 and 1")
+            for el in dim:
+                if el not in accepted_values:
+                    raise ValueError("Expected state values between 0 and 1")
             # check each dimension is >= 1
             if not len(dim) > 1:
                 raise ValueError(
@@ -83,9 +84,10 @@ class Board:
         )  # avoid overwriting provided state
         random.seed(self.randomize_seed)  # ensure determinism
 
+        # Set state to provided
         if state != 0:
-            # add check
-            pass
+            self.check_state(state)
+            self.state = state
 
         # Generate state
         else:
