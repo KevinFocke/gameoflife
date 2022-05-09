@@ -31,10 +31,20 @@ def sanity_check_nested_array():
 
 
 @pytest.fixture
-def random_board_fixture():
+def board_fixture_randomized():
     return gameoflife.main.Board(randomize=1, randomize_seed=10)
 
 
 @pytest.fixture
-def dead_board_fixture():
+def board_fixture_wrong_size_alphanumeric():
+    return gameoflife.main.Board(size=["a", 5])
+
+
+@pytest.fixture
+def board_fixture_wrong_size_len():
+    return gameoflife.main.Board(size=[5, 5, 5])
+
+
+@pytest.fixture
+def board_fixture_dead():
     return gameoflife.main.Board(randomize=0)

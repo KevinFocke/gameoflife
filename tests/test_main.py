@@ -1,4 +1,5 @@
 import gameoflife.main  # explicitly maintain namespace information for debug
+import pytest
 
 # Sanity checks
 
@@ -27,22 +28,34 @@ def test_multi_assert_nested_array(sanity_check_nested_array):
             assert el == 1
 
 
-# Test board states
+# Test board
+
+# __init__
 
 
-def test_init_board(dead_board_fixture):
+def test_init_board(board_fixture_dead):
     """
     Does the board get initialized?
     """
-    assert dead_board_fixture.state  # returns true if object exists
+    assert board_fixture_dead.state  # returns true if object exists
 
 
-# def test_dead_board_next_state(dead_board_fixture):
+@pytest.mark.xfail(raises=TypeError)
+def test_init_wrong_size_alphanumeric(board_fixture_wrong_size_alphanumeric):
+    pass
+
+
+@pytest.mark.xfail(raises=ValueError)
+def test_init_wrong_size_len(board_fixture_wrong_size_len):
+    pass
+
+
+# def test_dead_board_next_state(board_fixture_dead):
 #     """
 #     Does the dead board stay dead?
 #     Or have we created life out of nothing all of the sudden?
 #     """
-#     for cell in dead_board_fixture.next_state():
+#     for cell in board_fixture_dead.next_state():
 #         assert cell == 0
 
 
