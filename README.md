@@ -33,6 +33,10 @@ How to install & run:
 
 ## Dependencies
 
+## Reflection
+- Imports can be a pain to work with in Poetry, especially in conjuction with Pytest. Still, the automatic dependency management & consistent dev environment outweigh this negative aspect.
+- Continuous integration is great. Initial setup takes time but over the long term it decreases rote work & increases confidence that the code (still) works.
+
 ## Other
 
 - Code formatting by Black:
