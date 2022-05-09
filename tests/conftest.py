@@ -38,3 +38,8 @@ def board_fixture_randomized():
 @pytest.fixture
 def board_fixture_dead():
     return gameoflife.main.Board(randomize=0)
+
+
+@pytest.fixture
+def board_fixture_mismatch_state_size():
+    return gameoflife.main.Board(state=[[0, 1, 0], [0, 1, 1, 1]], size=[5, 5])

@@ -10,19 +10,23 @@ def module_sanity_check():
     """
     return 1
 
-    # if __name__ == "__main__":
-
 
 class Board:
     def check_size(self, size):
         if len(size) != 2:
-            raise ValueError
+            raise ValueError("expected size arg to be [int,int]")
         if not all(isinstance(el, int) for el in size):
-            raise TypeError
+            raise TypeError["expected size arg to be [int,int]"]
 
-    def __set_size(self, size):
+    def __set_size(self, state, size):
+        size_new = size
+        if state != 0:
+            print("setting size based on provided state")
+            self.check_state(state)
+            x, y = len(state[0]), len(state[1])
+            size_new = [x, y]
         self.check_size(size)
-        self.size_x, self.size_y = size
+        self.size_x, self.size_y = size_new
 
     def check_randomize_seed(self, randomize_seed):
         if not isinstance(randomize_seed, int):
@@ -35,7 +39,7 @@ class Board:
 
     def check_randomize(self, randomize):
         if randomize not in [0, 1]:
-            raise ValueError
+            raise ValueError("randomize value incorrect; expected 0 or 1")
 
     def __set_randomize(self, randomize):
         self.check_randomize(randomize)
@@ -44,7 +48,9 @@ class Board:
     def check_state_ambiguity(self, state, randomize):
         """Avoid randomizing a given state"""
         if state != 0 and randomize == 1:
-            raise customerrors.AmbiguousError
+            raise customerrors.AmbiguousError(
+                "state is provided, yet randomize is requested."
+            )
 
     def __generate_state_value(self):
         if self.randomize == 1:
@@ -52,15 +58,33 @@ class Board:
         else:
             return 0
 
+    def check_state(self, state):
+        """
+        checks if state is expected format:
+        eg. [[1,0],[0,1]]
+        """
+        accepted_values = [0, 1]
+        expected_format = "[[1,0],[0,1]]"
+        if not all(isinstance(el, list) for el in state):
+            raise TypeError("expected list of lists format:" + expected_format)
+        for dim in state:
+            # check that each element is 0 or 1
+            if not all([el in accepted_values for el in dim]):
+                raise ValueError("Expected state values between 0 and 1")
+            # check each dimension is >= 1
+            if not len(dim) > 1:
+                raise ValueError(
+                    "expected list with multiple values per dimension"
+                )
+
     def __set_state(self, state=0, randomize=0):
-        self.check_state_ambiguity(state, randomize)
+        self.check_state_ambiguity(
+            state, randomize
+        )  # avoid overwriting provided state
         random.seed(self.randomize_seed)  # ensure determinism
 
-        # TODO: check provided state;
-        # does it match dimensions?
-        # are all cells integers?
-        # TODO: create provided state
         if state != 0:
+            # add check
             pass
 
         # Generate state
@@ -77,16 +101,11 @@ class Board:
         randomize_seed=random.randint(0, 1000000),
         size=[5, 5],
     ):
-        self.__set_size(size)
+        self.__set_size(state, size)
         self.__set_randomize_seed(randomize_seed)
         self.__set_randomize(randomize)
         self.__set_state(state, randomize)
         print("hi")
 
 
-# a = Board(randomize_seed=10, randomize=1
 # TODO: Generate big fixture for performance testing
-
-# print(a.state)
-
-# print("testprint")

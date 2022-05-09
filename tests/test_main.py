@@ -78,7 +78,32 @@ def test_init_randomize_not_0_or_1():
 
 def test_init_state_ambiguous():
     with pytest.raises(gameoflife.main.customerrors.AmbiguousError):
-        gameoflife.main.Board(state=[2, 8], randomize=1)
+        gameoflife.main.Board(state=[[0, 1], [0, 0]], randomize=1)
+
+
+def test_init_state_dimensions_incorrect_type():
+    with pytest.raises(TypeError):
+        gameoflife.main.Board(state=[0, 1])
+
+
+def test_init_state_incorrect_dimension_length():
+    with pytest.raises(ValueError):
+        gameoflife.main.Board(state=[[0], [1]])
+
+
+def test_init_state_incorrect_values():
+    with pytest.raises(ValueError):
+        gameoflife.main.Board(state=[[0, 1], [1, 2]])
+
+
+# TODO: add check that state contents is always 0 or 1
+
+
+def test_init_state_detect_dimension_mismatch(
+    board_fixture_mismatch_state_size,
+):
+    assert board_fixture_mismatch_state_size.size_x == 3
+    assert board_fixture_mismatch_state_size.size_y == 4
 
 
 # def test_dead_board_next_state(board_fixture_dead):
