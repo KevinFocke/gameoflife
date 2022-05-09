@@ -33,13 +33,6 @@ class Board:
         self.randomize_seed = randomize_seed
         random.seed(self.randomize_seed)
 
-    def set_randomize(self, randomize, randomize_seed):
-        self.check_randomize(randomize_seed)
-        random.seed(randomize_seed)  # set random seed for determinism
-        self.randomize_seed = randomize_seed
-        if randomize == 0:
-            return False  # state not randomized
-
     def check_state_ambiguity(self, state, randomize):
         """Avoid randomizing a given state"""
         if state != 0 and randomize == 1:
@@ -47,7 +40,12 @@ class Board:
 
     def set_state(self, state=0, randomize=0):
         self.check_state_ambiguity(state, randomize)
-        #
+
+        if randomize == 1:
+            [
+                [random.randint(0, 1) for col in range(self.size_y)]
+                for row in range(self.size_x)
+            ]
 
     def __init__(
         self,
@@ -62,11 +60,6 @@ class Board:
         self.state = [
             [0 for col in range(self.size_y)] for row in range(self.size_x)
         ]
-        if randomize == 1:
-            [
-                [random.randint(0, 1) for col in range(self.size_y)]
-                for row in range(self.size_x)
-            ]
 
 
 a = Board()
