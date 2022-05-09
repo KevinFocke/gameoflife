@@ -33,22 +33,41 @@ class Board:
         self.randomize_seed = randomize_seed
         random.seed(self.randomize_seed)
 
+    def check_randomize(self, randomize):
+        if randomize not in [0, 1]:
+            raise ValueError
+
+    def __set_randomize(self, randomize):
+        self.check_randomize(randomize)
+        self.randomize = randomize
+
     def check_state_ambiguity(self, state, randomize):
         """Avoid randomizing a given state"""
         if state != 0 and randomize == 1:
             raise customerrors.AmbiguousError
 
+    def __generate_state_value(self):
+        if self.randomize == 1:
+            return random.randint(0, 1)
+        else:
+            return 0
+
     def __set_state(self, state=0, randomize=0):
         self.check_state_ambiguity(state, randomize)
-        # TODO generalize formula; it just changes the value
-        if randomize == 1:
-            self.state = [
-                [random.randint(0, 1) for col in range(self.size_y)]
-                for row in range(self.size_x)
-            ]
+        random.seed(self.randomize_seed)  # ensure determinism
+
+        # TODO: check provided state;
+        # does it match dimensions?
+        # are all cells integers?
+        # TODO: create provided state
+        if state != 0:
+            pass
+
+        # Generate state
         else:
             self.state = [
-                [0 for col in range(self.size_y)] for row in range(self.size_x)
+                [self.__generate_state_value() for col in range(self.size_y)]
+                for row in range(self.size_x)
             ]
 
     def __init__(
@@ -60,11 +79,14 @@ class Board:
     ):
         self.__set_size(size)
         self.__set_randomize_seed(randomize_seed)
+        self.__set_randomize(randomize)
         self.__set_state(state, randomize)
         print("hi")
 
 
-# a = Board(randomize_seed=10, randomize=1)
+# a = Board(randomize_seed=10, randomize=1
+# TODO: Generate big fixture for performance testing
+
 # print(a.state)
 
 # print("testprint")

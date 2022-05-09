@@ -71,6 +71,11 @@ def test_init_randomize_seed_determinism(board_fixture_randomized):
     ]
 
 
+def test_init_randomize_not_0_or_1():
+    with pytest.raises(ValueError):
+        gameoflife.main.Board(randomize=2)
+
+
 def test_init_state_ambiguous():
     with pytest.raises(gameoflife.main.customerrors.AmbiguousError):
         gameoflife.main.Board(state=[2, 8], randomize=1)
