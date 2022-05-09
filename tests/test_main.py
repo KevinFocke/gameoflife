@@ -1,3 +1,4 @@
+import gameoflife  # package
 import gameoflife.main  # explicitly maintain namespace information for debug
 import pytest
 
@@ -40,9 +41,28 @@ def test_init_board(board_fixture_dead):
     assert board_fixture_dead.state  # returns true if object exists
 
 
-def test_init_wrong_size_alphanumeric_alt():
+def test_init_wrong_size_alphanumeric():
     with pytest.raises(TypeError):
         gameoflife.main.Board(size=["a", 5])
+
+
+def test_init_wrong_size_length():
+    with pytest.raises(ValueError):
+        gameoflife.main.Board(size=[5, 5, 5])
+
+
+def test_init_wrong_randomize_alphanumeric():
+    with pytest.raises(TypeError):
+        gameoflife.main.Board(randomize_seed="a")
+
+
+def test_init_randomize_seed(board_fixture_randomized):
+    assert board_fixture_randomized.randomize_seed == 10
+
+
+def test_init_state_ambiguous():
+    with pytest.raises(gameoflife.main.customerrors.AmbiguousError):
+        gameoflife.main.Board(state=[2, 8], randomize=1)
 
 
 # def test_dead_board_next_state(board_fixture_dead):
