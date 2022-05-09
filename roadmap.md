@@ -6,8 +6,6 @@
 
 - [ ] Auto release a self-excecutable file on Github
 
-- [x] Setup initial tests
-
 
 
 ## Ver 2 - Game
