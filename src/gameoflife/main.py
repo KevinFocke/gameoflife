@@ -20,7 +20,7 @@ class Board:
         if not all(isinstance(el, int) for el in size):
             raise TypeError
 
-    def set_size(self, size):
+    def __set_size(self, size):
         self.check_size(size)
         self.size_x, self.size_y = size
 
@@ -28,7 +28,7 @@ class Board:
         if not isinstance(randomize_seed, int):
             raise TypeError
 
-    def set_randomize_seed(self, randomize_seed):
+    def __set_randomize_seed(self, randomize_seed):
         self.check_randomize_seed(randomize_seed)
         self.randomize_seed = randomize_seed
         random.seed(self.randomize_seed)
@@ -38,7 +38,7 @@ class Board:
         if state != 0 and randomize == 1:
             raise customerrors.AmbiguousError
 
-    def set_state(self, state=0, randomize=0):
+    def __set_state(self, state=0, randomize=0):
         self.check_state_ambiguity(state, randomize)
         # TODO generalize formula; it just changes the value
         if randomize == 1:
@@ -58,14 +58,13 @@ class Board:
         randomize_seed=random.randint(0, 1000000),
         size=[5, 5],
     ):
-        self.set_size(size)
-        self.set_randomize_seed(randomize_seed)
-        self.set_state(state, randomize)
+        self.__set_size(size)
+        self.__set_randomize_seed(randomize_seed)
+        self.__set_state(state, randomize)
         print("hi")
 
 
 # a = Board(randomize_seed=10, randomize=1)
-
 # print(a.state)
 
 # print("testprint")
