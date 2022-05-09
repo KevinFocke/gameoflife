@@ -40,14 +40,9 @@ def test_init_board(board_fixture_dead):
     assert board_fixture_dead.state  # returns true if object exists
 
 
-@pytest.mark.xfail(raises=TypeError)
-def test_init_wrong_size_alphanumeric(board_fixture_wrong_size_alphanumeric):
-    pass
-
-
-@pytest.mark.xfail(raises=ValueError)
-def test_init_wrong_size_len(board_fixture_wrong_size_len):
-    pass
+def test_init_wrong_size_alphanumeric_alt():
+    with pytest.raises(TypeError):
+        gameoflife.main.Board(size=["a", 5])
 
 
 # def test_dead_board_next_state(board_fixture_dead):
