@@ -2,11 +2,12 @@
 ## Ver 1 - Continuous Integration
 - [x] Setup continuous integration
 
-- [ ] Auto release on Github
+- [ ] Create tested classes
+
+- [ ] Auto release a self-excecutable file on Github
 
 - [x] Setup initial tests
- 
-- [ ] The program becomes self-excecutable (Frozen Python Binaries)
+
 
 
 ## Ver 2 - Game
