@@ -40,11 +40,15 @@ class Board:
 
     def set_state(self, state=0, randomize=0):
         self.check_state_ambiguity(state, randomize)
-
+        # TODO generalize formula; it just changes the value
         if randomize == 1:
-            [
+            self.state = [
                 [random.randint(0, 1) for col in range(self.size_y)]
                 for row in range(self.size_x)
+            ]
+        else:
+            self.state = [
+                [0 for col in range(self.size_y)] for row in range(self.size_x)
             ]
 
     def __init__(
@@ -57,12 +61,11 @@ class Board:
         self.set_size(size)
         self.set_randomize_seed(randomize_seed)
         self.set_state(state, randomize)
-        self.state = [
-            [0 for col in range(self.size_y)] for row in range(self.size_x)
-        ]
+        print("hi")
 
 
-a = Board()
+# a = Board(randomize_seed=10, randomize=1)
+
 # print(a.state)
 
 # print("testprint")

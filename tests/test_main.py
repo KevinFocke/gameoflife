@@ -60,6 +60,17 @@ def test_init_randomize_seed(board_fixture_randomized):
     assert board_fixture_randomized.randomize_seed == 10
 
 
+def test_init_randomize_seed_determinism(board_fixture_randomized):
+    """Does the random seed produce the same result?"""
+    assert board_fixture_randomized.state == [
+        [0, 1, 1, 0, 0],
+        [1, 1, 1, 0, 0],
+        [1, 1, 0, 0, 1],
+        [0, 1, 0, 1, 1],
+        [1, 1, 1, 1, 0],
+    ]
+
+
 def test_init_state_ambiguous():
     with pytest.raises(gameoflife.main.customerrors.AmbiguousError):
         gameoflife.main.Board(state=[2, 8], randomize=1)
