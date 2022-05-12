@@ -1,4 +1,5 @@
 import random
+import types
 
 import customerrors
 
@@ -80,10 +81,10 @@ class Board:
                     "expected list with multiple values per dimension"
                 )
 
-    def _iterate_cells(self, action_per_cell, invoke_lambda=0):
-        """Invokes action per cell.
-
-        If lambda flag is set it will invoke the function
+    def _iterate_cells(self, action_per_cell):
+        """
+        If action is a lambda it will invoke the function.
+        Else use a value.
 
         Why use lambda function?
 
@@ -91,6 +92,18 @@ class Board:
 
         Otherwise the action would be evaluated only once.
         """
+
+        # Check if the action is a lambda function
+        # Why use isinstance AND namecheck?
+        # Because isinstance(obj,LambdaType) is true for any function
+        # __name__ = "<lambda>" ensures it is an actual lambda
+        if (
+            isinstance(action_per_cell, types.LambdaType)
+            and action_per_cell.__name__ == "<lambda>"
+        ):
+            invoke_lambda = 1
+        else:
+            invoke_lambda = 0
 
         return [
             [
@@ -113,9 +126,7 @@ class Board:
 
         # Generate random state
         else:
-            self.state = self._iterate_cells(
-                self.__generate_state_value(), invoke_lambda=1
-            )
+            self.state = self._iterate_cells(self.__generate_state_value())
 
     def _check_pos_in_board(self, x_pos, y_pos):
         if not ((0 >= x_pos < self.size_x) and (0 >= y_pos < self.size_y)):
