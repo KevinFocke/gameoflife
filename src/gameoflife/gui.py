@@ -1,7 +1,7 @@
-from tkinter import *
+import tkinter
 from tkinter import ttk
 
-root = Tk()
+root = tkinter.Tk()
 frm = ttk.Frame(root, padding=10)
 frm.grid()
 ttk.Label(frm, text="Hello World!").grid(column=0, row=0)

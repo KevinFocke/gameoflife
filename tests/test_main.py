@@ -9,6 +9,10 @@ def test_main_module_found():
     assert gameoflife.main.module_sanity_check() == 1
 
 
+def test_gui_module_found():
+    assert gameoflife.gui.module_sanity_check() == 1
+
+
 def test_fixture_input_via_conftest(sanity_check_fixture):
     """
     conftest.py is used to supply fixtures accross test files
