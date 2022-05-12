@@ -113,6 +113,13 @@ class Board:
             for row in range(self.size_x)
         ]
 
+    def __iter__(self):
+        """Iterate over the board state"""
+        for row in range(self.size_x):
+            for col in range(self.size_y):
+                yield self.state[row][col]
+                # iterator is a generator
+
     def __set_state(self, state=0, randomize=0):
         self.check_state_ambiguity(
             state, randomize
@@ -187,17 +194,5 @@ class Board:
         self.__set_state(state, randomize)
         self.step = 0  # step starts at 0
 
-
-edge_board = Board(
-    state=[
-        [1, 1, 0, 0, 0],
-        [0, 1, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-    ]
-)
-
-edge_board._count_neighbours(0, 0)
 
 # TODO: Generate big fixture for performance testing

@@ -240,4 +240,48 @@ def test_dead_board_next_state(board_fixture_dead):
     ]
 
 
+def test_board_iterator():
+    custom_board = gameoflife.main.Board(
+        state=[
+            [0, 0, 1, 0, 0],
+            [0, 1, 0, 0, 0],
+            [0, 0, 1, 1, 0],
+            [0, 0, 1, 0, 0],
+            [0, 1, 0, 0, 0],
+        ]
+    )
+    iteration_list = []
+    for cell in custom_board:
+        iteration_list.append(cell)
+
+    # black auto formats like this. Yikes.
+    assert iteration_list == [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+    ]
+
+
 # count live neighbors
