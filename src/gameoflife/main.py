@@ -97,15 +97,17 @@ class Board:
                 for row in range(self.size_x)
             ]
 
+    def _check_pos_in_board(self, x_pos, y_pos):
+        if not ((0 >= x_pos < self.size_x) and (0 >= y_pos < self.size_y)):
+            raise (ValueError)
+
     def _count_neighbours(self, x_pos, y_pos):
         """Counts the cell's neighbours.
         Returns the value (zero-indexed)
         """
         # Do the arguments exist on the board?
         # size_x and size_y are one-indexed
-        if not ((0 >= x_pos < self.size_x) and (0 >= y_pos < self.size_y)):
-            raise (ValueError)
-
+        self._check_pos_in_board(x_pos, y_pos)
         pass
 
     def next_step(self):
@@ -130,7 +132,6 @@ class Board:
         self.__set_randomize(randomize)
         self.__set_state(state, randomize)
         self.step = 0  # step starts at 0
-        print("hi")
 
 
 # TODO: Generate big fixture for performance testing
