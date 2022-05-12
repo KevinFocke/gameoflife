@@ -2,7 +2,8 @@ import random
 import types
 
 import customerrors
-import gui
+
+# import gui
 
 
 def module_sanity_check():
@@ -217,5 +218,6 @@ class Board:
         self.step = 0  # step starts at 0
 
 
-gui.test_gui()
+# gui.test_gui() # temporarily disabled while searching
+# cross-platform display emulation
 # TODO: Generate big fixture for performance testing
