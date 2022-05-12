@@ -1,0 +1,6 @@
+// Can fix importing/PyLance issues
+{
+    "python.analysis.extraPaths": [
+        "./src/gameoflife"
+    ]
+}

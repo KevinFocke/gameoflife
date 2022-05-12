@@ -1,20 +1,9 @@
-import tkinter as tk
+from tkinter import *
+from tkinter import ttk
 
-# Tkinter Window
-root_window = tk.Tk()
-
-# Window Settings
-root_window.title("Application Title")
-root_window.geometry("300x100")
-root_window.configure(background="#353535")
-
-# Text
-tk.Label(root_window, text="I am a cool GUI", fg="White", bg="#353535").pack()
-
-# Exit Button
-tk.Button(
-    root_window, text="Exit", width=10, command=root_window.destroy
-).pack()
-
-# Main loop
-root_window.mainloop()
+root = Tk()
+frm = ttk.Frame(root, padding=10)
+frm.grid()
+ttk.Label(frm, text="Hello World!").grid(column=0, row=0)
+ttk.Button(frm, text="Quit", command=root.destroy).grid(column=1, row=0)
+root.mainloop()
