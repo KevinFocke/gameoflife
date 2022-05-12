@@ -53,8 +53,10 @@ class Board:
             )
 
     def __generate_state_value(self):
+        """If randomize flag is set, return a random lambda function
+        else return 0"""
         if self.randomize == 1:
-            return random.randint(0, 1)
+            return lambda: random.randint(0, 1)
         else:
             return 0
 
@@ -67,7 +69,6 @@ class Board:
         expected_format = "[[1,0],[0,1]]"
         if not all(isinstance(el, list) for el in state):
             raise TypeError("expected list of lists format:" + expected_format)
-        # TODO : Refactor cell iteration
         for dim in state:
             # check that each element is 0 or 1
             for el in dim:
@@ -78,6 +79,19 @@ class Board:
                 raise ValueError(
                     "expected list with multiple values per dimension"
                 )
+
+    def _iterate_cells(self, lambda_action_per_cell):
+        """Invokes lambda function per cell.
+
+        Why lambda function?
+
+        To generate a fresh value with every cell.
+
+        Otherwise the action would be evaluated only once."""
+        return [
+            [lambda_action_per_cell() for col in range(self.size_y)]
+            for row in range(self.size_x)
+        ]
 
     def __set_state(self, state=0, randomize=0):
         self.check_state_ambiguity(
@@ -90,12 +104,9 @@ class Board:
             self.check_state(state)
             self.state = state
 
-        # Generate state
+        # Generate random state
         else:
-            self.state = [
-                [self.__generate_state_value() for col in range(self.size_y)]
-                for row in range(self.size_x)
-            ]
+            self.state = self._iterate_cells(self.__generate_state_value())
 
     def _check_pos_in_board(self, x_pos, y_pos):
         if not ((0 >= x_pos < self.size_x) and (0 >= y_pos < self.size_y)):
@@ -133,5 +144,7 @@ class Board:
         self.__set_state(state, randomize)
         self.step = 0  # step starts at 0
 
+
+a = Board(randomize=1, randomize_seed=10)
 
 # TODO: Generate big fixture for performance testing
