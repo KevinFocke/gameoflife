@@ -196,3 +196,4 @@ class Board:
 
 
 # TODO: Generate big fixture for performance testing
+# TODO: Refactor state initialization to avoid lambda.

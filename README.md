@@ -17,10 +17,6 @@ https://wiki.python.org/moin/PyQt/GUI_Testing
 https://github.com/pytest-dev/pytest-qt/#pytest-qt
 https://martinfowler.com/eaaDev/uiArchs.html
  
-- Add custom board iterator
-
-- Use lambda expressions
-
 - Make program self-excecutable (Frozen python binaries)
 
 ## Usage Information
