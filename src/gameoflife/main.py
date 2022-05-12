@@ -80,16 +80,23 @@ class Board:
                     "expected list with multiple values per dimension"
                 )
 
-    def _iterate_cells(self, lambda_action_per_cell):
-        """Invokes lambda function per cell.
+    def _iterate_cells(self, action_per_cell, invoke_lambda=0):
+        """Invokes action per cell.
 
-        Why lambda function?
+        If lambda flag is set it will invoke the function
+
+        Why use lambda function?
 
         To generate a fresh value with every cell.
 
-        Otherwise the action would be evaluated only once."""
+        Otherwise the action would be evaluated only once.
+        """
+
         return [
-            [lambda_action_per_cell() for col in range(self.size_y)]
+            [
+                action_per_cell() if invoke_lambda == 1 else action_per_cell
+                for col in range(self.size_y)
+            ]
             for row in range(self.size_x)
         ]
 
@@ -106,7 +113,9 @@ class Board:
 
         # Generate random state
         else:
-            self.state = self._iterate_cells(self.__generate_state_value())
+            self.state = self._iterate_cells(
+                self.__generate_state_value(), invoke_lambda=1
+            )
 
     def _check_pos_in_board(self, x_pos, y_pos):
         if not ((0 >= x_pos < self.size_x) and (0 >= y_pos < self.size_y)):
