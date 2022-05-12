@@ -138,7 +138,20 @@ def test_triangle_board_count_neighbours():
             [0, 0, 0, 0, 0],
         ]
     )
-    assert triangle_board._count_neighbours(3, 2) == 3
+    assert triangle_board._count_neighbours(3, 2) == 2
+
+
+def test_count_neighbours_edge():
+    edge_board = gameoflife.main.Board(
+        state=[
+            [1, 1, 0, 0, 0],
+            [0, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+        ]
+    )
+    assert edge_board._count_neighbours(0, 0) == 2
 
 
 def test_count_neighbours_pos_out_of_board_neg_x_pos():

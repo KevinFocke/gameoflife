@@ -129,8 +129,9 @@ class Board:
             self.state = self._iterate_cells(self.__generate_state_value())
 
     def _check_pos_in_board(self, x_pos, y_pos):
-        if not ((0 >= x_pos < self.size_x) and (0 >= y_pos < self.size_y)):
+        if not ((0 <= x_pos < self.size_x) and (0 <= y_pos < self.size_y)):
             raise (ValueError)
+        return 0
 
     def _count_neighbours(self, x_pos, y_pos):
         """Counts the cell's neighbours.
@@ -138,8 +139,26 @@ class Board:
         """
         # Do the arguments exist on the board?
         # size_x and size_y are one-indexed
+
+        # Does the board position exist?
         self._check_pos_in_board(x_pos, y_pos)
-        pass
+
+        #
+        neighbour_count = 0
+
+        for row_offset in range(-1, 2):
+            for col_offset in range(-1, 2):
+                if row_offset == 0 and col_offset == 0:
+                    continue  # skip value
+                try:
+                    self._check_pos_in_board(
+                        x_pos + row_offset, y_pos + col_offset
+                    )
+                except ValueError:
+                    continue
+                if self.state[x_pos + row_offset][y_pos + col_offset] == 1:
+                    neighbour_count += 1
+        return neighbour_count
 
     def next_step(self):
         """Calculates neighbours, updates state & Increments the step"""
@@ -165,6 +184,16 @@ class Board:
         self.step = 0  # step starts at 0
 
 
-a = Board(randomize=1, randomize_seed=10)
+edge_board = Board(
+    state=[
+        [1, 1, 0, 0, 0],
+        [0, 1, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+    ]
+)
+
+edge_board._count_neighbours(0, 0)
 
 # TODO: Generate big fixture for performance testing
