@@ -2,6 +2,7 @@ import random
 import types
 
 import customerrors
+import gui
 
 
 def module_sanity_check():
@@ -216,4 +217,5 @@ class Board:
         self.step = 0  # step starts at 0
 
 
+gui.test_gui()
 # TODO: Generate big fixture for performance testing
