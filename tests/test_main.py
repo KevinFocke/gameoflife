@@ -220,6 +220,7 @@ def test_single_cell_next_step():
             [0, 0, 0, 0, 0],
         ]
     )
+    single_cell_board.next_step()
     assert single_cell_board.state == [
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
@@ -252,7 +253,7 @@ def test_board_iterator():
     )
     iteration_list = []
     for cell in custom_board:
-        iteration_list.append(cell)
+        iteration_list.append(cell[0])
 
     # black auto formats like this. Yikes.
     assert iteration_list == [

@@ -81,8 +81,9 @@ class Board:
                     "expected list with multiple values per dimension"
                 )
 
-    def _iterate_cells(self, action_per_cell):
+    def _initialize_cells(self, action_per_cell):
         """
+        Method intended for initialization.
         If action is a lambda it will invoke the function.
         Else use a value.
 
@@ -114,10 +115,11 @@ class Board:
         ]
 
     def __iter__(self):
-        """Iterate over the board state"""
+        """Iterate over board
+        yields: [base_cell_state, x_pos, y_pos]"""
         for row in range(self.size_x):
             for col in range(self.size_y):
-                yield self.state[row][col]
+                yield [self.state[row][col], row, col]
                 # iterator is a generator
 
     def __set_state(self, state=0, randomize=0):
@@ -133,7 +135,7 @@ class Board:
 
         # Generate random state
         else:
-            self.state = self._iterate_cells(self.__generate_state_value())
+            self.state = self._initialize_cells(self.__generate_state_value())
 
     def _check_pos_in_board(self, x_pos, y_pos):
         """Does the cell exist within the board?Why < self.size_x?
@@ -171,6 +173,20 @@ class Board:
                     neighbour_count += 1
         return neighbour_count
 
+    def _decide_and_set(self, base_cell_state, neighbour_count, x_pos, y_pos):
+        """Decide cell state & set"""
+        if base_cell_state == 1 and neighbour_count <= 1:
+            self.state[x_pos][y_pos] = 0  # underpopulation
+            return 0
+        if base_cell_state == 1 and 2 >= neighbour_count <= 3:
+            return 0  # no need to set, already alive
+        if base_cell_state == 1 and neighbour_count > 3:
+            self.state[x_pos][y_pos] = 0  # overpopulation
+            return 0
+        if base_cell_state == 0 and neighbour_count == 3:
+            self.state[x_pos][y_pos] = 1  # reproduction
+            return 0
+
     def next_step(self):
         """Calculates neighbours, updates state & Increments the step"""
 
@@ -179,7 +195,12 @@ class Board:
         # Check neighbour count
         # Decide cell state
         # Change cell state
-        pass
+        for cell in self:
+            base_cell_state, x_pos, y_pos = cell[0], cell[1], cell[2]
+            cell_neighbours = self._count_neighbours(x_pos=x_pos, y_pos=y_pos)
+            self._decide_and_set(
+                base_cell_state, cell_neighbours, x_pos, y_pos
+            )
 
     def __init__(
         self,
@@ -196,4 +217,3 @@ class Board:
 
 
 # TODO: Generate big fixture for performance testing
-# TODO: Refactor state initialization to avoid lambda.
