@@ -46,5 +46,18 @@ def board_fixture_mismatch_state_size():
 
 
 @pytest.fixture
+def board_fixture_triangle():
+    return gameoflife.main.Board(
+        state=[
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 0],
+            [0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 0],
+        ],
+    )
+
+
+@pytest.fixture
 def board_fixture_state_4_by_4():
     return gameoflife.main.Board(state=[[0, 1, 1, 1], [1, 1, 1, 0]])

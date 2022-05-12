@@ -16,7 +16,7 @@ class Board:
         if len(size) != 2:
             raise ValueError("expected size arg to be [int,int]")
         if not all(isinstance(el, int) for el in size):
-            raise TypeError["expected size arg to be [int,int]"]
+            raise TypeError("expected size arg to be [int,int]")
 
     def __set_size(self, state, size):
         size_new = size
@@ -67,6 +67,7 @@ class Board:
         expected_format = "[[1,0],[0,1]]"
         if not all(isinstance(el, list) for el in state):
             raise TypeError("expected list of lists format:" + expected_format)
+        # TODO : Refactor cell iteration
         for dim in state:
             # check that each element is 0 or 1
             for el in dim:
@@ -96,6 +97,27 @@ class Board:
                 for row in range(self.size_x)
             ]
 
+    def _count_neighbours(self, x_pos, y_pos):
+        """Counts the cell's neighbours.
+        Returns the value (zero-indexed)
+        """
+        # Do the arguments exist on the board?
+        # size_x and size_y are one-indexed
+        if not ((0 >= x_pos < self.size_x) and (0 >= y_pos < self.size_y)):
+            raise (ValueError)
+
+        pass
+
+    def next_step(self):
+        """Calculates neighbours, updates state & Increments the step"""
+
+        # For every cell
+
+        # Check neighbour count
+        # Decide cell state
+        # Change cell state
+        pass
+
     def __init__(
         self,
         state=0,
@@ -107,6 +129,7 @@ class Board:
         self.__set_randomize_seed(randomize_seed)
         self.__set_randomize(randomize)
         self.__set_state(state, randomize)
+        self.step = 0  # step starts at 0
         print("hi")
 
 

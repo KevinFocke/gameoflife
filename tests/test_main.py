@@ -100,9 +100,6 @@ def test_init_state_set(board_fixture_state_4_by_4):
     assert board_fixture_state_4_by_4.state == [[0, 1, 1, 1], [1, 1, 1, 0]]
 
 
-# TODO: add check that state contents is always 0 or 1
-
-
 def test_init_state_detect_dimension_mismatch(
     board_fixture_mismatch_state_size,
 ):
@@ -110,13 +107,124 @@ def test_init_state_detect_dimension_mismatch(
     assert board_fixture_mismatch_state_size.size_y == 4
 
 
-# def test_dead_board_next_state(board_fixture_dead):
-#     """
-#     Does the dead board stay dead?
-#     Or have we created life out of nothing all of the sudden?
-#     """
-#     for cell in board_fixture_dead.next_state():
-#         assert cell == 0
+# Calculate next step
+def test_triangle_next_step():
+    triangle_board = gameoflife.main.Board(
+        state=[
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 0],
+            [0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 0],
+        ]
+    )
+    triangle_board.next_step()
+    assert triangle_board.state == [
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 1, 1, 0],
+        [0, 0, 1, 1, 0],
+        [0, 0, 0, 0, 0],
+    ]
+
+
+def test_triangle_board_count_neighbours():
+    triangle_board = gameoflife.main.Board(
+        state=[
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 0],
+            [0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 0],
+        ]
+    )
+    assert triangle_board._count_neighbours(3, 2) == 3
+
+
+def test_count_neighbours_pos_out_of_board_neg_x_pos():
+    with pytest.raises(ValueError):
+        triangle_board = gameoflife.main.Board(
+            state=[
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 1, 1, 0],
+                [0, 0, 1, 0, 0],
+                [0, 0, 0, 0, 0],
+            ]
+        )
+        triangle_board._count_neighbours(-1, 2)
+
+
+def test_count_neighbours_pos_out_of_board_x_pos_off_by_one():
+    with pytest.raises(ValueError):
+        triangle_board = gameoflife.main.Board(
+            state=[
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 1, 1, 0],
+                [0, 0, 1, 0, 0],
+                [0, 0, 0, 0, 0],
+            ]
+        )
+        triangle_board._count_neighbours(5, 2)
+
+
+def test_count_neighbours_pos_out_of_board_neg_y_pos():
+    with pytest.raises(ValueError):
+        triangle_board = gameoflife.main.Board(
+            state=[
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 1, 1, 0],
+                [0, 0, 1, 0, 0],
+                [0, 0, 0, 0, 0],
+            ]
+        )
+        triangle_board._count_neighbours(2, -1)
+
+
+def test_count_neighbours_pos_out_of_board_y_pos_off_by_one():
+    with pytest.raises(ValueError):
+        triangle_board = gameoflife.main.Board(
+            state=[
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 1, 1, 0],
+                [0, 0, 1, 0, 0],
+                [0, 0, 0, 0, 0],
+            ]
+        )
+        triangle_board._count_neighbours(2, 5)
+
+
+def test_single_cell_next_step():
+    single_cell_board = gameoflife.main.Board(
+        state=[
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+        ]
+    )
+    assert single_cell_board.state == [
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+    ]
+
+
+def test_dead_board_next_state(board_fixture_dead):
+    board_fixture_dead.next_step()
+    assert board_fixture_dead.state == [
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+    ]
 
 
 # count live neighbors
