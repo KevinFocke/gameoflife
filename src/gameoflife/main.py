@@ -129,9 +129,10 @@ class Board:
             self.state = self._iterate_cells(self.__generate_state_value())
 
     def _check_pos_in_board(self, x_pos, y_pos):
+        """Does the cell exist within the board?Why < self.size_x?
+        Becuase size_x is one-indexed"""
         if not ((0 <= x_pos < self.size_x) and (0 <= y_pos < self.size_y)):
             raise (ValueError)
-        return 0
 
     def _count_neighbours(self, x_pos, y_pos):
         """Counts the cell's neighbours.
@@ -143,19 +144,22 @@ class Board:
         # Does the board position exist?
         self._check_pos_in_board(x_pos, y_pos)
 
-        #
+        # Count neighbours by offsetting base cell
         neighbour_count = 0
 
         for row_offset in range(-1, 2):
             for col_offset in range(-1, 2):
+                # skip base cell
                 if row_offset == 0 and col_offset == 0:
-                    continue  # skip value
+                    continue
+                # does the offset cell exist?
                 try:
                     self._check_pos_in_board(
                         x_pos + row_offset, y_pos + col_offset
                     )
                 except ValueError:
                     continue
+                # check cell state
                 if self.state[x_pos + row_offset][y_pos + col_offset] == 1:
                     neighbour_count += 1
         return neighbour_count
