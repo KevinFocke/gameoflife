@@ -172,4 +172,4 @@ def gui_initializator():
             pass
 
 
-gui_initializator()
+# gui_initializator()
