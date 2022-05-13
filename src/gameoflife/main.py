@@ -1,5 +1,7 @@
+import copy
 import random
 import types
+from functools import wraps
 
 import customerrors
 
@@ -125,7 +127,7 @@ class Board:
     def __set_state(self, state=0, randomize=0):
         self.check_state_ambiguity(
             state, randomize
-        )  # avoid overwriting provided state
+        )  # avoid overwriting provided state`:a`
         random.seed(self.randomize_seed)  # ensure determinism
 
         # Set state to provided
@@ -173,32 +175,50 @@ class Board:
                     neighbour_count += 1
         return neighbour_count
 
-    def _decide_and_set(self, base_cell_state, neighbour_count, x_pos, y_pos):
-        """Decide cell state & set"""
+    def _decide_and_set_proposed(
+        self, base_cell_state, neighbour_count, x_pos, y_pos
+    ):
+        """Decide cell state & set proposed state."""
         if base_cell_state == 1 and neighbour_count <= 1:
-            self.state[x_pos][y_pos] = 0  # underpopulation
+            self.proposed_state[x_pos][y_pos] = 0  # underpopulation
             return 0
         if base_cell_state == 1 and 2 >= neighbour_count <= 3:
             return 0  # no need to set, already alive
         if base_cell_state == 1 and neighbour_count > 3:
-            self.state[x_pos][y_pos] = 0  # overpopulation
+            self.proposed_state[x_pos][y_pos] = 0  # overpopulation
             return 0
         if base_cell_state == 0 and neighbour_count == 3:
-            self.state[x_pos][y_pos] = 1  # reproduction
+            self.proposed_state[x_pos][y_pos] = 1  # reproduction
             return 0
 
+    def _proposed_state_to_current(func):
+        """
+        Updates state once all cells are evaluated."""
+
+        @wraps(func)
+        def wrapper(self, *args, **kwargs):
+            self.proposed_state = copy.deepcopy(self.state)
+            func(self, *args, **kwargs)
+            self.state = self.proposed_state
+
+        return wrapper
+
+    @_proposed_state_to_current
     def next_step(self):
-        """Calculates neighbours, updates state & Increments the step"""
+        """Calculates neighbours, updates state & Increments the step.
+        Needs _proposed_state_to_current wrapper
+        to ensure each cell is evaluated in the same state"""
 
         # For every cell
 
         # Check neighbour count
         # Decide cell state
         # Change cell state
+
         for cell in self:
             base_cell_state, x_pos, y_pos = cell[0], cell[1], cell[2]
             cell_neighbours = self._count_neighbours(x_pos=x_pos, y_pos=y_pos)
-            self._decide_and_set(
+            self._decide_and_set_proposed(
                 base_cell_state, cell_neighbours, x_pos, y_pos
             )
 
