@@ -216,9 +216,6 @@ class Board:
         self.__set_state(state, randomize)
         self.step = 0  # step starts at 0
 
-
-gui.gui_initializator()
-
 # gui.test_gui() # temporarily disabled while searching
 # cross-platform display emulation
 # TODO: Generate big fixture for performance testing
