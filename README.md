@@ -1,6 +1,6 @@
 # Game Of Life
 
-Simulates Conway's Game Of Life. Interact using a GUI.
+Simulates Conway's Game Of Life.
 
 ## General information
 
@@ -12,11 +12,6 @@ This is a project-based learning experience. My main goals for the project:
 
 - Practice Object-Oriented programming.
 
-- Create a GUI & automate GUI testing
-https://wiki.python.org/moin/PyQt/GUI_Testing
-https://github.com/pytest-dev/pytest-qt/#pytest-qt
-https://martinfowler.com/eaaDev/uiArchs.html
- 
 - Make program self-excecutable (Frozen python binaries)
 
 ## Usage Information
