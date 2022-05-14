@@ -12,6 +12,8 @@ This was a project-based learning experience. My main goals for the project:
 
 - Practice Object-Oriented programming (custom iterator, methods)
 
+- Create command line interface
+
 ## Usage Information
 
 How to install & run:
