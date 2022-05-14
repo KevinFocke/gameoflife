@@ -8,10 +8,7 @@ import click
 import customerrors
 
 
-# Command line interface
-@click.command()
-@click.option("--state", help="Set initial state")
-def module_sanity_check():
+def module_sanity_check(*args, **kwargs):
 
     """
     Can the module be found during testing?
@@ -267,8 +264,15 @@ class Board:
         self.step = 0  # step starts at 0
 
 
+# Command line interface
+@click.command()
+@click.option("--state", help="Set initial state")
+def program_runner(*args, **kwargs):
+    print("hello")
+
+
 if __name__ == "__main__":
-    print("Hello")
+    program_runner()
 
 # Typical use case:
 
