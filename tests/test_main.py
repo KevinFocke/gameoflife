@@ -230,6 +230,26 @@ def test_single_cell_next_step():
     ]
 
 
+def test_reproduction_next_step():
+    single_cell_board = gameoflife.main.Board(
+        state=[
+            [0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 1, 0, 1, 0],
+        ]
+    )
+    single_cell_board.next_step()
+    assert single_cell_board.state == [
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0],
+    ]
+
+
 def test_dead_board_next_state(board_fixture_dead):
     board_fixture_dead.next_step()
     assert board_fixture_dead.state == [
