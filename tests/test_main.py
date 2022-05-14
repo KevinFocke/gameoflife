@@ -116,6 +116,12 @@ def test_check_next_step_incorrect_input_alphanumeric():
         board.check_next_step("a")
 
 
+def test_check_next_step_incorrect_input_negative():
+    with pytest.raises(ValueError):
+        board = gameoflife.main.Board(randomize=1, randomize_seed=5)
+        board.check_next_step(-1)
+
+
 def test_next_step_incorrect_input_alphanumeric():
     with pytest.raises(TypeError):
         board = gameoflife.main.Board(randomize=1, randomize_seed=5)

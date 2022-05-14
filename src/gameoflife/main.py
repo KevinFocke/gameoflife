@@ -28,7 +28,7 @@ class Board:
         """Set the board size. If state is provided, set based on state."""
         size_new = size
         if state != 0:
-            print("setting size based on provided state")
+            print("Setting size based on provided state. Size parameter is ignored.")
             self.check_state(state)
             x, y = len(state[0]), len(state[1])
             size_new = [x, y]
@@ -239,14 +239,16 @@ class Board:
             cell_neighbours = self._count_neighbours(x_pos=x_pos, y_pos=y_pos)
             self._decide_and_set_proposed(cell_state, cell_neighbours, x_pos, y_pos)
 
-    def check_next_step(self, stepcount):
-        if not isinstance(stepcount, int):
-            raise TypeError
+    def check_next_step(self, steps):
+        if not isinstance(steps, int):
+            raise TypeError("Provided non-numeric input")
+        if steps < 0:
+            raise ValueError("Negative number")
 
-    def next_step(self, stepcount=1):
+    def next_step(self, steps=1):
         """Calculates and sets next board state"""
-        self.check_next_step(stepcount)
-        for step in range(stepcount):
+        self.check_next_step(steps)
+        for step in range(steps):
             self._next_board_state()
 
     def __init__(
@@ -266,9 +268,27 @@ class Board:
 
 # Command line interface
 @click.command()
-@click.option("--state", help="Set initial state")
-def program_runner(*args, **kwargs):
-    print("hello")
+@click.option("--randomize", default=0, help="Randomize the board")
+@click.option(
+    "--randomize_seed",
+    default=random.randint(0, 1000000),
+    help="Set randomization seed for deterministic randomization",
+)
+@click.option(
+    "--size_x",
+    default=5,
+    help="Explicitly set y dimension. \n Flag gets ignored if state is also provided.",
+)
+@click.option(
+    "--size_y",
+    default=5,
+    help="Explicitly set x dimension. \n Flag gets ignored if state is also provided.",
+)
+@click.option("--steps", default=1, help="Amount of steps to take")
+def program_runner(randomize, randomize_seed, size_x, size_y, steps):
+    size = [size_x, size_y]
+    myboard = Board(randomize=randomize, randomize_seed=randomize_seed, size=size)
+    myboard.next_step(steps=steps)
 
 
 if __name__ == "__main__":
