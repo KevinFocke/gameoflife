@@ -4,8 +4,7 @@
 
 - [x] Create tested Board class
 
-- [ ] Auto release a self-excecutable file on Github
+## Ver 2 - Game & CLI Interactive
+- [x] Runs Conway's Game Of Life in terminal. No frills.
 
-
-## Ver 2 - Game
-- [ ] Runs Conway's Game Of Life in terminal. No frills.
+- [ ] Make CLI input interactive using Click

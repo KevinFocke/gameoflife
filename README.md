@@ -35,7 +35,7 @@ Install project dependencies
 Use virtual environment
 
     poetry shell
-    
+
 Run python file
 
     python src/gameoflife/main.py
