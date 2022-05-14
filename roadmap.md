@@ -1,10 +1,10 @@
 # Roadmap
-## Ver 1 - Continuous Integration
+## Minor Milestone - Continuous Integration
 - [x] Setup continuous integration
 
 - [x] Create tested Board class
 
-## Ver 2 - Game & CLI Interactive
+## Major Milestone, Ver 1 - Game & Interactive CLI
 - [x] Runs Conway's Game Of Life in terminal. No frills.
 
-- [ ] Make CLI input interactive using Click
+- [x] Make CLI input interactive using Click

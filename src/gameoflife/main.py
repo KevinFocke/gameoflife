@@ -268,27 +268,42 @@ class Board:
 
 # Command line interface
 @click.command()
-@click.option("--randomize", default=0, help="Randomize the board")
+@click.option("--randomize", default=1, prompt=True, help="Randomize the board")
 @click.option(
     "--randomize_seed",
     default=random.randint(0, 1000000),
+    prompt=True,
     help="Set randomization seed for deterministic randomization",
 )
 @click.option(
     "--size_x",
     default=5,
+    prompt=True,
     help="Explicitly set y dimension. \n Flag gets ignored if state is also provided.",
 )
 @click.option(
     "--size_y",
     default=5,
+    prompt=True,
     help="Explicitly set x dimension. \n Flag gets ignored if state is also provided.",
 )
-@click.option("--steps", default=1, help="Amount of steps to take")
+@click.option("--steps", default=1, prompt=True, help="Amount of steps to take")
 def program_runner(randomize, randomize_seed, size_x, size_y, steps):
     size = [size_x, size_y]
     myboard = Board(randomize=randomize, randomize_seed=randomize_seed, size=size)
     myboard.next_step(steps=steps)
+    print("\n(Press Ctrl + C to quit.) \n")
+    while True:
+        steps = input("How many steps do you want to take: ")
+        try:
+            steps = int(steps)
+        except (TypeError, ValueError):
+            print("Error: Expecting a number.")
+            continue
+        if steps <= 0:
+            print("Error: Expecting a number that is bigger than ")
+            continue
+        myboard.next_step(steps=int(steps))
 
 
 if __name__ == "__main__":
