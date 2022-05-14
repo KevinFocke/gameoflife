@@ -16,12 +16,14 @@ def module_sanity_check():
 
 class Board:
     def check_size(self, size):
+        """Check if size parameter is formatted correctly"""
         if len(size) != 2:
             raise ValueError("expected size arg to be [int,int]")
         if not all(isinstance(el, int) for el in size):
             raise TypeError("expected size arg to be [int,int]")
 
     def __set_size(self, state, size):
+        """Set the board size. If state is provided, set based on state."""
         size_new = size
         if state != 0:
             print("setting size based on provided state")
@@ -32,19 +34,23 @@ class Board:
         self.size_x, self.size_y = size_new
 
     def check_randomize_seed(self, randomize_seed):
+        """Check if randomize_seed is formatted correctly"""
         if not isinstance(randomize_seed, int):
             raise TypeError
 
     def __set_randomize_seed(self, randomize_seed):
+        """Set the randomize_seed"""
         self.check_randomize_seed(randomize_seed)
         self.randomize_seed = randomize_seed
         random.seed(self.randomize_seed)
 
     def check_randomize(self, randomize):
+        """Check if randomize is formatted correctly."""
         if randomize not in [0, 1]:
             raise ValueError("randomize value incorrect; expected 0 or 1")
 
     def __set_randomize(self, randomize):
+        """Set the randomize"""
         self.check_randomize(randomize)
         self.randomize = randomize
 
@@ -123,6 +129,7 @@ class Board:
                 # iterator is a generator
 
     def __set_state(self, state=0, randomize=0):
+        """Set the board state. If randomize flag is set, generate state."""
         self.check_state_ambiguity(
             state, randomize
         )  # avoid overwriting provided state`:a`
@@ -221,8 +228,7 @@ class Board:
         Thus the evaluation should read from self.state,
         and write to self.proposed_state"""
 
-        # For every cell
-
+        # For every cell:
         # Check neighbour count
         # Decide cell state
         # Change cell state
@@ -238,6 +244,7 @@ class Board:
         randomize_seed=random.randint(0, 1000000),
         size=[5, 5],
     ):
+        """Runs when object is initialized"""
         self.__set_size(state, size)
         self.__set_randomize_seed(randomize_seed)
         self.__set_randomize(randomize)
