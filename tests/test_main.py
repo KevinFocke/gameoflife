@@ -128,6 +128,27 @@ def test_triangle_next_step():
     ]
 
 
+def test_triangle_next_twosteps():
+    triangle_board = gameoflife.main.Board(
+        state=[
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 0],
+            [0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 0],
+        ]
+    )
+    triangle_board.next_step()
+    triangle_board.next_step()
+    assert triangle_board.state == [
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 1, 1, 0],
+        [0, 0, 1, 1, 0],
+        [0, 0, 0, 0, 0],
+    ]
+
+
 def test_triangle_board_count_neighbours():
     triangle_board = gameoflife.main.Board(
         state=[

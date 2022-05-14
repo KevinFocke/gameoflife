@@ -85,7 +85,7 @@ class Board:
 
     def _initialize_cells(self, action_per_cell):
         """
-        Method intended for initialization.
+        Method intended for initialization of state.
         If action is a lambda it will invoke the function.
         Else use a value.
 
@@ -191,6 +191,14 @@ class Board:
             self.proposed_state[x_pos][y_pos] = 1  # reproduction
             return 0
 
+    def pretty_print(self):
+        """Pretty prints the board state + step
+        If descriptors = 0, only print state"""
+        print("State:")
+        for row in self.state:
+            print(f"{row}")
+        print(f"Step: {self.step}")
+
     def _proposed_state_to_current(func):
         """
         Updates state once all cells are evaluated."""
@@ -200,6 +208,8 @@ class Board:
             self.proposed_state = copy.deepcopy(self.state)
             func(self, *args, **kwargs)
             self.state = self.proposed_state
+            self.step += 1
+            self.pretty_print()
 
         return wrapper
 
@@ -214,7 +224,6 @@ class Board:
         # Check neighbour count
         # Decide cell state
         # Change cell state
-
         for cell in self:
             base_cell_state, x_pos, y_pos = cell[0], cell[1], cell[2]
             cell_neighbours = self._count_neighbours(x_pos=x_pos, y_pos=y_pos)
@@ -234,7 +243,3 @@ class Board:
         self.__set_randomize(randomize)
         self.__set_state(state, randomize)
         self.step = 0  # step starts at 0
-
-
-# cross-platform display emulation
-# TODO: Generate big fixture for performance testing
