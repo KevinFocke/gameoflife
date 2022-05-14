@@ -79,9 +79,7 @@ class Board:
                     raise ValueError("Expected state values between 0 and 1")
             # check each dimension is >= 1
             if not len(dim) > 1:
-                raise ValueError(
-                    "expected list with multiple values per dimension"
-                )
+                raise ValueError("expected list with multiple values per dimension")
 
     def _initialize_cells(self, action_per_cell):
         """
@@ -118,7 +116,7 @@ class Board:
 
     def __iter__(self):
         """Iterate over board
-        yields: [base_cell_state, x_pos, y_pos]"""
+        yields: [cell_state, x_pos, y_pos]"""
         for row in range(self.size_x):
             for col in range(self.size_y):
                 yield [self.state[row][col], row, col]
@@ -165,9 +163,7 @@ class Board:
                     continue
                 # does the offset cell exist?
                 try:
-                    self._check_pos_in_board(
-                        x_pos + row_offset, y_pos + col_offset
-                    )
+                    self._check_pos_in_board(x_pos + row_offset, y_pos + col_offset)
                 except ValueError:
                     continue
                 # check cell state
@@ -175,19 +171,17 @@ class Board:
                     neighbour_count += 1
         return neighbour_count
 
-    def _decide_and_set_proposed(
-        self, base_cell_state, neighbour_count, x_pos, y_pos
-    ):
+    def _decide_and_set_proposed(self, cell_state, neighbour_count, x_pos, y_pos):
         """Decide cell state & set proposed state."""
-        if base_cell_state == 1 and neighbour_count <= 1:
+        if cell_state == 1 and neighbour_count <= 1:
             self.proposed_state[x_pos][y_pos] = 0  # underpopulation
             return 0
-        if base_cell_state == 1 and 2 >= neighbour_count <= 3:
+        if cell_state == 1 and 2 >= neighbour_count <= 3:
             return 0  # no need to set, already alive
-        if base_cell_state == 1 and neighbour_count > 3:
+        if cell_state == 1 and neighbour_count > 3:
             self.proposed_state[x_pos][y_pos] = 0  # overpopulation
             return 0
-        if base_cell_state == 0 and neighbour_count == 3:
+        if cell_state == 0 and neighbour_count == 3:
             self.proposed_state[x_pos][y_pos] = 1  # reproduction
             return 0
 
@@ -217,7 +211,15 @@ class Board:
     def next_step(self):
         """Calculates neighbours, updates state & Increments the step.
         Needs _proposed_state_to_current wrapper
-        to ensure each cell is evaluated in the same state"""
+        to ensure each cell is evaluated in the same state
+
+        Note: There is coupling between next_step(),_decide_and_set_proposed()
+        ,and _proposed_state_to_current().
+        However, in my opinion it's justified in this case to make the logic explicit.
+        The proposed state should only be committed
+        when the current state is fully evaluated.
+        Thus the evaluation should read from self.state,
+        and write to self.proposed_state"""
 
         # For every cell
 
@@ -225,11 +227,9 @@ class Board:
         # Decide cell state
         # Change cell state
         for cell in self:
-            base_cell_state, x_pos, y_pos = cell[0], cell[1], cell[2]
+            cell_state, x_pos, y_pos = cell[0], cell[1], cell[2]
             cell_neighbours = self._count_neighbours(x_pos=x_pos, y_pos=y_pos)
-            self._decide_and_set_proposed(
-                base_cell_state, cell_neighbours, x_pos, y_pos
-            )
+            self._decide_and_set_proposed(cell_state, cell_neighbours, x_pos, y_pos)
 
     def __init__(
         self,

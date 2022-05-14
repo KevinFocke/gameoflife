@@ -6,11 +6,11 @@ Library to simulate Conway's Game Of Life.
 
 This is a project-based learning experience. My main goals for the project:
 
-- Setup Continuous Integration environment
+- Setup Continuous Integration environment for testing
 
 - Practice Test-Driven-Development (Red, Green, Refactor methodology)
 
-- Practice Object-Oriented programming.
+- Practice Object-Oriented programming (custom iterator, methods)
 
 ## Usage Information
 
