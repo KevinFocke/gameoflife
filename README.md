@@ -12,7 +12,7 @@ This was a project-based learning experience. My main goals for the project:
 
 - Practice Object-Oriented programming (custom iterator, methods)
 
-- Create command line interface
+- Create interactive command line interface
 
 ## Usage Information
 
@@ -59,7 +59,7 @@ Found in pyproject.toml
 
 ## Other
 
-- Code formatting by Black:
+- Code formatting by Black (line-length 88):
 https://black.readthedocs.io/en/stable/
 - Linting using Flake8
 - Imports sorted using isort
