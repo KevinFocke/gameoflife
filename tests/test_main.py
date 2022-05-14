@@ -108,7 +108,21 @@ def test_init_state_detect_dimension_mismatch(
 
 
 # Calculate next step
-def test_triangle_next_step():
+
+
+def test_check_next_step_incorrect_input_alphanumeric():
+    with pytest.raises(TypeError):
+        board = gameoflife.main.Board(randomize=1, randomize_seed=5)
+        board.check_next_step("a")
+
+
+def test_next_step_incorrect_input_alphanumeric():
+    with pytest.raises(TypeError):
+        board = gameoflife.main.Board(randomize=1, randomize_seed=5)
+        board.next_step("a")
+
+
+def test_triangle__next_board_state():
     triangle_board = gameoflife.main.Board(
         state=[
             [0, 0, 0, 0, 0],
@@ -118,7 +132,7 @@ def test_triangle_next_step():
             [0, 0, 0, 0, 0],
         ]
     )
-    triangle_board.next_step()
+    triangle_board._next_board_state()
     assert triangle_board.state == [
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
@@ -138,8 +152,7 @@ def test_triangle_next_twosteps():
             [0, 0, 0, 0, 0],
         ]
     )
-    triangle_board.next_step()
-    triangle_board.next_step()
+    triangle_board.next_step(2)
     assert triangle_board.state == [
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
@@ -231,7 +244,7 @@ def test_count_neighbours_pos_out_of_board_y_pos_off_by_one():
         triangle_board._count_neighbours(2, 5)
 
 
-def test_single_cell_next_step():
+def test_single_cell__next_board_state():
     single_cell_board = gameoflife.main.Board(
         state=[
             [0, 0, 0, 0, 0],
@@ -241,7 +254,7 @@ def test_single_cell_next_step():
             [0, 0, 0, 0, 0],
         ]
     )
-    single_cell_board.next_step()
+    single_cell_board._next_board_state()
     assert single_cell_board.state == [
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
@@ -251,7 +264,7 @@ def test_single_cell_next_step():
     ]
 
 
-def test_reproduction_next_step():
+def test_reproduction__next_board_state():
     single_cell_board = gameoflife.main.Board(
         state=[
             [0, 0, 0, 1, 0],
@@ -261,7 +274,7 @@ def test_reproduction_next_step():
             [0, 1, 0, 1, 0],
         ]
     )
-    single_cell_board.next_step()
+    single_cell_board._next_board_state()
     assert single_cell_board.state == [
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
@@ -272,7 +285,7 @@ def test_reproduction_next_step():
 
 
 def test_dead_board_next_state(board_fixture_dead):
-    board_fixture_dead.next_step()
+    board_fixture_dead._next_board_state()
     assert board_fixture_dead.state == [
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],

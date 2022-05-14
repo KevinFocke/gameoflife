@@ -195,10 +195,9 @@ class Board:
     def pretty_print(self):
         """Pretty prints the board state + step
         If descriptors = 0, only print state"""
-        print("State:")
+        print(f"Step {self.step} state:")
         for row in self.state:
             print(f"{row}")
-        print(f"Step: {self.step}")
 
     def _proposed_state_to_current(func):
         """
@@ -206,21 +205,22 @@ class Board:
 
         @wraps(func)
         def wrapper(self, *args, **kwargs):
+            self.pretty_print()  # state before
             self.proposed_state = copy.deepcopy(self.state)
             func(self, *args, **kwargs)
             self.state = self.proposed_state
             self.step += 1
-            self.pretty_print()
+            self.pretty_print()  # state after
 
         return wrapper
 
     @_proposed_state_to_current
-    def next_step(self):
+    def _next_board_state(self):
         """Calculates neighbours, updates state & Increments the step.
         Needs _proposed_state_to_current wrapper
         to ensure each cell is evaluated in the same state
 
-        Note: There is coupling between next_step(),_decide_and_set_proposed()
+        Note: There is coupling between _next_board_state(),_decide_and_set_proposed()
         ,and _proposed_state_to_current().
         However, in my opinion it's justified in this case to make the logic explicit.
         The proposed state should only be committed
@@ -237,6 +237,16 @@ class Board:
             cell_neighbours = self._count_neighbours(x_pos=x_pos, y_pos=y_pos)
             self._decide_and_set_proposed(cell_state, cell_neighbours, x_pos, y_pos)
 
+    def check_next_step(self, stepcount):
+        if not isinstance(stepcount, int):
+            raise TypeError
+
+    def next_step(self, stepcount=1):
+        """Calculates and sets next board state"""
+        self.check_next_step(stepcount)
+        for step in range(stepcount):
+            self._next_board_state()
+
     def __init__(
         self,
         state=0,
@@ -250,3 +260,11 @@ class Board:
         self.__set_randomize(randomize)
         self.__set_state(state, randomize)
         self.step = 0  # step starts at 0
+
+
+if __name__ == "__main__":
+    print("Hello")
+# Typical use case:
+
+# myBoard = Board(randomize=1, size=[10, 10])
+# myBoard.next_step(5)
