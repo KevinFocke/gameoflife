@@ -3,9 +3,14 @@ import random
 import types
 from functools import wraps
 
+import click
+
 import customerrors
 
 
+# Command line interface
+@click.command()
+@click.option("--state", help="Set initial state")
 def module_sanity_check():
 
     """
@@ -264,6 +269,7 @@ class Board:
 
 if __name__ == "__main__":
     print("Hello")
+
 # Typical use case:
 
 # myBoard = Board(randomize=1, size=[10, 10])
